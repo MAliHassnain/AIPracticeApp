@@ -363,3 +363,16 @@ MigrationBackup/
 FodyWeavers.xsd
 # Local runtime data (saved agent history)
 App_Data/
+
+# Angular / Node build output
+.angular/
+dist/
+node_modules/
+
+# Local secrets and environment files (keep API keys out of git)
+.env
+.env.*
+secrets.json
+*.local.json
+appsettings.*.local.json
+
