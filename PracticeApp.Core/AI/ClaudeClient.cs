@@ -19,7 +19,7 @@ namespace PracticeApp.Core.AI
             if (string.IsNullOrWhiteSpace(settings.ApiKey) || settings.ApiKey == PlaceholderKey)
             {
                 throw new LlmConfigurationException(
-                    "API key is not set. Run: dotnet user-secrets set \"Llm:ApiKey\" \"<your-key>\" in PracticeApp.Server.");
+                    "API key is not set. Put it in PracticeApp.Server/appsettings.json under Llm:ApiKey.");
             }
 
             var body = new JsonObject

@@ -2,7 +2,7 @@ namespace PracticeApp.Core.AI
 {
     /// <summary>
     /// Connection settings for the language model, bound from the "Llm" section of appsettings.json.
-    /// The API key is read from user secrets or the Llm__ApiKey environment variable.
+    /// Set <see cref="ApiKey"/> there. Nothing outside the project is required.
     /// </summary>
     public sealed class LlmSettings
     {
