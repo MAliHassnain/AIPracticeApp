@@ -1,0 +1,57 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="card-head">
+      <span class="icon-tile"><i class="bi bi-egg-fried"></i></span>
+      <h2 class="card-title">What should the agent cook tonight?</h2>
+    </div>
+
+    <form class="goal-form" (ngSubmit)="submit()">
+      <input class="form-control goal-input" name="goal" type="text" autocomplete="off"
+             [(ngModel)]="goal"
+             [disabled]="running"
+             [placeholder]="info?.defaultGoal ?? 'What are you in the mood for?'" />
+      <button type="submit" class="btn-accent" [disabled]="running">
+        <span *ngIf="running" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <i *ngIf="!running" class="bi bi-stars"></i>
+        {{ running ? 'Working...' : 'Run agent' }}
+      </button>
+    </form>
+
+    <p class="form-hint" *ngIf="running">
+      The agent is checking past recipes, searching the web and saving a recipe. This can take up to a minute.
+    </p>
+    <p class="form-hint" *ngIf="!running">
+      Optional: describe what you want, for example vegetarian, under 30 minutes or spicy. Leave it empty for the default.
+    </p>
+  </div>
+</div>
+
+<ng-container *ngIf="result">
+  <div class="card mb-3" *ngIf="result.recipe as recipe; else noRecipe">
+    <div class="card-body">
+      <div class="card-head">
+        <span class="badge-new">New</span>
+        <h2 class="card-title recipe-title">{{ recipe.title }}</h2>
+      </div>
+      <app-recipe-detail [recipe]="recipe"></app-recipe-detail>
+      <div class="agent-note" *ngIf="result.finalAnswer">
+        <i class="bi bi-chat-left-text"></i>{{ result.finalAnswer }}
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noRecipe>
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="card-head">
+          <span class="icon-tile tile-warning"><i class="bi bi-exclamation-circle"></i></span>
+          <h2 class="card-title">The agent finished without saving a recipe</h2>
+        </div>
+        <p class="card-text">Stop reason: {{ result.stopReason }}</p>
+        <div class="agent-note" *ngIf="result.finalAnswer">{{ result.finalAnswer }}</div>
+      </div>
+    </div>
+  </ng-template>
+
+  <app-agent-activity [steps]="result.steps" [turns]="result.turns"></app-agent-activity>
+</ng-container>

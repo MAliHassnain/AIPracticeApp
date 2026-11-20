@@ -1,0 +1,37 @@
+<div class="page-header">
+  <h1 class="page-title">Dashboard</h1>
+  <p class="page-subtitle">Practice agents, retrieval, and conversation in one workspace.</p>
+</div>
+
+<div class="card mb-3">
+  <div class="card-body hero-card">
+    <div>
+      <h2 class="hero-title">Welcome back</h2>
+      <p class="card-text">Pick a lab below to start experimenting.</p>
+    </div>
+
+    <span class="status-badge" [class.is-ready]="loaded && !error" [class.is-error]="error">
+      <span class="status-dot"></span>
+      <span *ngIf="!loaded">Connecting...</span>
+      <span *ngIf="loaded && !error">{{ message }}</span>
+      <span *ngIf="error">{{ error }}</span>
+    </span>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-12 col-md-6 col-xl-3" *ngFor="let feature of features">
+    <div class="card h-100">
+      <div class="card-body d-flex flex-column">
+        <div class="card-head">
+          <span class="icon-tile"><i class="bi" [ngClass]="feature.icon"></i></span>
+          <h3 class="card-title">{{ feature.title }}</h3>
+        </div>
+        <p class="card-text flex-grow-1">{{ feature.description }}</p>
+        <div class="mt-4">
+          <a class="btn-accent" [routerLink]="feature.route">Open <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

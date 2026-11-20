@@ -1,0 +1,23 @@
+@PracticeApp.Server_HostAddress = http://localhost:5237
+
+GET {{PracticeApp.Server_HostAddress}}/api/home
+Accept: application/json
+
+###
+
+GET {{PracticeApp.Server_HostAddress}}/api/agents/recipe/info
+Accept: application/json
+
+###
+
+POST {{PracticeApp.Server_HostAddress}}/api/agents/recipe/run
+Content-Type: application/json
+
+{ "goal": "Something vegetarian under 30 minutes" }
+
+###
+
+GET {{PracticeApp.Server_HostAddress}}/api/agents/recipe/history
+Accept: application/json
+
+###

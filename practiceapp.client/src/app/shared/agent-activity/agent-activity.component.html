@@ -1,0 +1,16 @@
+<div class="card">
+  <button type="button" class="activity-toggle" [attr.aria-expanded]="expanded" (click)="expanded = !expanded">
+    <span class="icon-tile"><i class="bi bi-activity"></i></span>
+    <span class="card-title">Agent activity</span>
+    <span class="activity-meta">{{ items.length }} steps, {{ turns }} turns</span>
+    <i class="bi ms-auto" [ngClass]="expanded ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+  </button>
+
+  <ul class="activity-list" *ngIf="expanded">
+    <li class="activity-item" *ngFor="let item of items">
+      <span class="step-tag" [ngClass]="'tone-' + item.tone">{{ item.label }}</span>
+      <span class="step-detail">{{ item.detail }}</span>
+      <span class="step-turn">T{{ item.turn }}</span>
+    </li>
+  </ul>
+</div>

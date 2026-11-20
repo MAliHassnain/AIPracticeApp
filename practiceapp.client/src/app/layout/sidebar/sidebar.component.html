@@ -1,0 +1,15 @@
+<nav class="app-sidebar">
+  <div class="sidebar-label">AI Lab</div>
+  <ul class="nav flex-column">
+    <li class="nav-item" *ngFor="let item of navItems">
+      <a class="nav-link"
+         [routerLink]="item.route"
+         routerLinkActive="active"
+         [title]="item.label">
+        <i class="bi" [ngClass]="item.icon"></i>
+        <span class="nav-label">{{ item.label }}</span>
+        <i class="bi bi-chevron-right nav-chevron"></i>
+      </a>
+    </li>
+  </ul>
+</nav>

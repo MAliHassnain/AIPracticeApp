@@ -1,0 +1,30 @@
+<header class="app-header">
+  <div class="header-brand">
+    <a class="brand" routerLink="/home">
+      <span class="brand-mark" aria-hidden="true"><i class="bi bi-stars"></i></span>
+      <span class="nav-label">{{ appName }}</span>
+    </a>
+    <button type="button" class="icon-btn nav-label" (click)="toggleSidebar.emit()" aria-label="Collapse menu">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+  </div>
+
+  <button type="button" class="icon-btn collapsed-toggle" (click)="toggleSidebar.emit()" aria-label="Toggle menu">
+    <i class="bi bi-list"></i>
+  </button>
+
+  <div class="header-actions">
+    <span class="header-model" *ngIf="model">
+      <i class="bi bi-cpu"></i>
+      <span>{{ model }}</span>
+    </span>
+
+    <div class="header-profile">
+      <span class="avatar">AP</span>
+      <div class="profile-meta">
+        <div class="profile-name">AI Practitioner</div>
+        <div class="profile-role">Workspace</div>
+      </div>
+    </div>
+  </div>
+</header>

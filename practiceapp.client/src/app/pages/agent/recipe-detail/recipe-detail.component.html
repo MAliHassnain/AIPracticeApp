@@ -1,0 +1,29 @@
+<div class="chip-row">
+  <span class="chip" *ngIf="recipe.totalTime"><i class="bi bi-clock"></i>{{ recipe.totalTime }}</span>
+  <span class="chip" *ngIf="recipe.servings"><i class="bi bi-people"></i>{{ recipe.servings }} servings</span>
+  <span class="chip"><i class="bi bi-basket"></i>{{ recipe.ingredients.length }} ingredients</span>
+  <span class="chip"><i class="bi bi-list-ol"></i>{{ recipe.method.length }} steps</span>
+  <a class="chip chip-link" *ngIf="recipe.sourceUrl" [href]="recipe.sourceUrl" target="_blank" rel="noopener">
+    <i class="bi bi-link-45deg"></i>Source
+  </a>
+</div>
+
+<p class="card-text mb-3" *ngIf="recipe.description">{{ recipe.description }}</p>
+
+<div class="row g-4">
+  <div class="col-md-5">
+    <div class="section-label">Ingredients</div>
+    <ul class="ingredient-list">
+      <li *ngFor="let ingredient of recipe.ingredients">
+        <span>{{ ingredient.item }}</span>
+        <span class="text-muted">{{ ingredient.quantity }}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-7">
+    <div class="section-label">Method</div>
+    <ol class="method-list">
+      <li *ngFor="let step of recipe.method">{{ step }}</li>
+    </ol>
+  </div>
+</div>

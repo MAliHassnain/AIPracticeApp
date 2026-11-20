@@ -1,0 +1,38 @@
+<div class="section-header">
+  <div class="section-label">Saved recipes</div>
+  <button type="button" class="btn-soft-danger" *ngIf="recipes.length" (click)="confirmClear()">
+    <i class="bi bi-trash"></i>Clear all
+  </button>
+</div>
+
+<div class="card" *ngIf="!recipes.length">
+  <div class="empty-state">
+    <span class="icon-tile"><i class="bi bi-journal-x"></i></span>
+    <h2 class="card-title">No history yet</h2>
+    <p class="card-text">
+      Run the agent from the <a href="#" class="link-accent" (click)="goToMain.emit(); $event.preventDefault()">Main</a> tab
+      and saved recipes will appear here.
+    </p>
+  </div>
+</div>
+
+<div class="history-list" *ngIf="recipes.length">
+  <div class="card history-item" *ngFor="let recipe of recipes; trackBy: trackById">
+    <button type="button" class="history-head" [attr.aria-expanded]="openId === recipe.id" (click)="toggle(recipe.id)">
+      <span class="icon-tile"><i class="bi bi-egg-fried"></i></span>
+      <span class="history-title">{{ recipe.title }}</span>
+      <span class="chip d-none d-md-inline-flex" *ngIf="recipe.totalTime"><i class="bi bi-clock"></i>{{ recipe.totalTime }}</span>
+      <span class="history-date">{{ recipe.createdUtc | date: 'd MMM, h:mm a' }}</span>
+      <i class="bi" [ngClass]="openId === recipe.id ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+    </button>
+
+    <div class="history-body" *ngIf="openId === recipe.id">
+      <app-recipe-detail [recipe]="recipe"></app-recipe-detail>
+      <div class="text-end mt-3">
+        <button type="button" class="btn-soft-danger" (click)="confirmRemove(recipe)">
+          <i class="bi bi-trash"></i>Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

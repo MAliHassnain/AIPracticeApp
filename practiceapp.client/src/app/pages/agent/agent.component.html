@@ -1,0 +1,36 @@
+<div class="page-header">
+  <h1 class="page-title">Agent</h1>
+  <p class="page-subtitle">A desi dinner agent that checks past recipes, searches the web and saves a new recipe.</p>
+</div>
+
+<div class="tabs" role="tablist">
+  <button type="button" class="tab" role="tab"
+          [class.active]="activeTab === 'main'" [attr.aria-selected]="activeTab === 'main'"
+          (click)="activeTab = 'main'">
+    <i class="bi bi-stars"></i>Main
+  </button>
+  <button type="button" class="tab" role="tab"
+          [class.active]="activeTab === 'history'" [attr.aria-selected]="activeTab === 'history'"
+          (click)="activeTab = 'history'">
+    <i class="bi bi-clock-history"></i>History
+    <span class="tab-count">{{ history.length }}</span>
+  </button>
+</div>
+
+<div class="alert-soft" role="alert" *ngIf="error">
+  <i class="bi bi-exclamation-triangle-fill"></i>
+  <span class="flex-grow-1">{{ error }}</span>
+  <button type="button" class="icon-btn" aria-label="Dismiss" (click)="error = ''"><i class="bi bi-x-lg"></i></button>
+</div>
+
+<app-recipe-run *ngIf="activeTab === 'main'"
+                [info]="info"
+                [running]="running"
+                [result]="result"
+                (run)="run($event)"></app-recipe-run>
+
+<app-recipe-history *ngIf="activeTab === 'history'"
+                    [recipes]="history"
+                    (remove)="removeRecipe($event)"
+                    (clearAll)="clearHistory()"
+                    (goToMain)="activeTab = 'main'"></app-recipe-history>
